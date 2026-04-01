@@ -1,0 +1,887 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>基于LIBERO数据集微调GD | My Love</title><meta name="author" content="Wamingmo"><meta name="copyright" content="Wamingmo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一些过程和经验，有些基础内容，思路可供参考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于LIBERO数据集微调GD">
+<meta property="og:url" content="http://example.com/2026/04/01/finetune-groundingdino-on-libero/index.html">
+<meta property="og:site_name" content="My Love">
+<meta property="og:description" content="一些过程和经验，有些基础内容，思路可供参考">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/head.jpg">
+<meta property="article:published_time" content="2026-04-01T08:09:42.266Z">
+<meta property="article:modified_time" content="2026-04-01T08:09:54.346Z">
+<meta property="article:author" content="Wamingmo">
+<meta property="article:tag" content="internship">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "基于LIBERO数据集微调GD",
+  "url": "http://example.com/2026/04/01/finetune-groundingdino-on-libero/",
+  "image": "http://example.com/img/head.jpg",
+  "datePublished": "2026-04-01T08:09:42.266Z",
+  "dateModified": "2026-04-01T08:09:54.346Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Wamingmo",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/04/01/finetune-groundingdino-on-libero/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基于LIBERO数据集微调GD',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">My Love</span></a><a class="nav-page-title" href="/"><span class="site-name">基于LIBERO数据集微调GD</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">基于LIBERO数据集微调GD</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-04-01T08:09:42.266Z" title="Created 2026-04-01 16:09:42">2026-04-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-04-01T08:09:54.346Z" title="Updated 2026-04-01 16:09:54">2026-04-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">5.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>22mins</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="测试GroundingDINO等各模型在LIBERO数据集上的表现"><a href="#测试GroundingDINO等各模型在LIBERO数据集上的表现" class="headerlink" title="测试GroundingDINO等各模型在LIBERO数据集上的表现"></a>测试<code>GroundingDINO</code>等各模型在LIBERO数据集上的表现</h2><blockquote>
+<p>本文仅用于提供思路，代码由ai生成</p>
+<p>且某些文字部分由ai生成，可能会有不真实的评价，请看官自行分辨理解</p>
+<p>文章中的代码和环境在：<a target="_blank" rel="noopener" href="https://github.com/wamingmo/libero/tree/master">wamingmo&#x2F;libero at master</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env:libero,libero_new,gd_finetune,gd_eval</span><br></pre></td></tr></table></figure>
+
+<h3 id="一些指标"><a href="#一些指标" class="headerlink" title="一些指标"></a>一些指标</h3><ul>
+<li><strong>mAP@50</strong>：IoU ≥ 0.5 时的平均精度均值（主指标）</li>
+<li><strong>mAP@50:95</strong>：多 IoU 阈值综合评价（更严格）</li>
+<li><strong>Per-class AP</strong>：每类物体的检测精度，发现薄弱类别</li>
+<li><strong>Recall@100</strong>：召回率，评估漏检率</li>
+<li><strong>IoU (交并比) ≥ 0.5</strong> 的意思是：你画的预测框和真实的物体框，重叠面积超过了一半（50%）。只要达到这个门槛，模型就被认为是“检测成功”了</li>
+</ul>
+<h3 id="一些超参数"><a href="#一些超参数" class="headerlink" title="一些超参数"></a><strong>一些超参数</strong></h3><p><code>max_epochs</code></p>
+<ul>
+<li>总共训练多少轮（完整遍历训练集的次数）。</li>
+<li>太小可能欠拟合，太大可能过拟合。</li>
+</ul>
+<p><code>lr</code>（学习率）</p>
+<ul>
+<li>每次参数更新步长大小。</li>
+<li>太大：震荡、发散；太小：收敛慢、可能卡住。</li>
+</ul>
+<p><code>batch_size</code></p>
+<ul>
+<li>每次迭代喂多少张图。</li>
+<li>主要受显存限制；越大梯度更平滑，越小噪声更大。</li>
+</ul>
+<p><code>AMP</code>（混合精度）</p>
+<ul>
+<li>用 FP16&#x2F;BF16 + FP32 混合训练。</li>
+<li>优点：省显存、提速；少数情况下数值不稳定。</li>
+</ul>
+<p><code>checkpoint interval</code></p>
+<ul>
+<li>每多少个 epoch 存一次模型。</li>
+<li>间隔小：更安全但占空间；间隔大：省空间但恢复点少。</li>
+</ul>
+<p><code>save_best=&#39;coco/bbox_mAP&#39;</code></p>
+<ul>
+<li>按验证集 <code>bbox_mAP</code> 自动保留最好权重。</li>
+<li>通常这是最终部署首选。</li>
+</ul>
+<p><code>val_interval</code></p>
+<ul>
+<li>每多少个 epoch 做一次验证。</li>
+<li>更频繁可更早发现过拟合，但会增加时间开销。</li>
+</ul>
+<h3 id="将libero的数据集投影到2d生成测试GT–可行"><a href="#将libero的数据集投影到2d生成测试GT–可行" class="headerlink" title="将libero的数据集投影到2d生成测试GT–可行"></a>将libero的数据集投影到2d生成测试GT–可行</h3><p>严格说是<strong>两者一起用</strong>，但“标注哪些物体”更偏向 <strong>BDDL&#x2F;环境对象定义</strong>，不是直接从 HDF5 里读现成 2D 框。</p>
+<p>具体流程是：</p>
+<p>1.从 HDF5 取这一帧的 <code>state</code> 和 <code>image</code></p>
+<ul>
+<li><code>states</code>、<code>obs</code> 来自 HDF5。</li>
+</ul>
+<p>2.用 <code>bddl_file</code> + <code>model_xml</code> 重建环境，再把该帧 state 回放进去</p>
+<ul>
+<li>解析并加载 BDDL。</li>
+</ul>
+<p>3.遍历环境中的对象集合来决定“有哪些物体要标注”</p>
+<ul>
+<li><code>env.objects_dict</code> 和 <code>env.fixtures_dict</code>。</li>
+</ul>
+<p>4.再根据该帧状态计算点&#x2F;框</p>
+<ul>
+<li>点：3D-&gt;2D 投影</li>
+<li>框：优先分割掩码，失败则点框 fallback。</li>
+</ul>
+<p>所以结论：</p>
+<ul>
+<li>“标哪些物体”来源：环境对象定义（由 BDDL&#x2F;任务环境决定）。</li>
+<li>“这一帧的位置和可见框”来源：HDF5 帧状态回放后的几何&#x2F;分割结果。</li>
+</ul>
+<h3 id="Grounding-DINO"><a href="#Grounding-DINO" class="headerlink" title="Grounding DINO"></a>Grounding DINO</h3><p>之前搜索发现<code>grounding dino</code>有<code>Tiny</code>、<code>Base</code>和<code>Large</code>三种模型，本来准备使用<code>Large</code>模型进行微调，后改为测试任务。</p>
+<p><strong>Swin-T&#x2F;B</strong> 是纯粹的“视觉骨干网络”（Backbone），而 <strong>Grounding DINO Tiny&#x2F;Base</strong> 是以这些骨干网络为基础构建的“开集目标检测器”。</p>
+<table>
+<thead>
+<tr>
+<th><strong>属性</strong></th>
+<th><strong>Swin-T (Tiny)</strong></th>
+<th><strong>Swin-B (Base)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>通道数 (C)</strong></td>
+<td>96</td>
+<td>128</td>
+</tr>
+<tr>
+<td><strong>层数 (Depths)</strong></td>
+<td>[2, 2, 6, 2]</td>
+<td>[2, 2, 18, 2]</td>
+</tr>
+<tr>
+<td><strong>参数量 (Params)</strong></td>
+<td><strong>~28M</strong></td>
+<td><strong>~88M</strong></td>
+</tr>
+<tr>
+<td><strong>FLOPs (计算量)</strong></td>
+<td>4.5G</td>
+<td>15.4G</td>
+</tr>
+<tr>
+<td><strong>定位</strong></td>
+<td>移动端&#x2F;推理速度优先</td>
+<td>性能优先，适合作为大型检测器的底座</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>模型版本</strong></th>
+<th><strong>视觉骨干网络 (Backbone)</strong></th>
+<th><strong>全模型参数量 (Params)</strong></th>
+<th><strong>权重文件大小 (Disk)</strong></th>
+<th><strong>推理显存占用 (VRAM)</strong></th>
+<th><strong>COCO 零样本精度 (AP)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Grounding DINO Tiny</strong></td>
+<td><strong>Swin-T</strong> (~28M)</td>
+<td><strong>约 172M</strong></td>
+<td>~660 MB</td>
+<td>约 3GB - 4GB</td>
+<td>48.4</td>
+</tr>
+<tr>
+<td><strong>Grounding DINO Base</strong></td>
+<td><strong>Swin-B</strong> (~88M)</td>
+<td><strong>约 230M - 250M</strong></td>
+<td>~900 MB</td>
+<td>约 6GB - 8GB</td>
+<td>52.5</td>
+</tr>
+</tbody></table>
+<p>进一步搜索发现官方并没有公布<code>Large</code>模型的<code>pth（模型权重文件）</code>，同时发现了<code>GroundingDINO</code>出了1.5和1.6版本，搜索后发现依旧无果（官方没有给出pth文件）<del>可恶的AI，告诉我有新的模型，但是没有说清官方没有公布，我蠢死了,应该早点去官网查看的。。。这告诉我们不能太依赖AI</del></p>
+<h3 id="SAM"><a href="#SAM" class="headerlink" title="SAM"></a>SAM</h3><p><strong>SAM</strong> 是 Meta (Facebook) 在 2023 年发布的里程碑式模型，全称 <strong>Segment Anything Model</strong>。</p>
+<p>功能：</p>
+<ul>
+<li><strong>零样本分割：</strong> 它不需要针对特定物体（比如专门训练分猫、分车）进行训练。只要你给它一个<strong>点（Point）</strong>、一个<strong>框（Box）或一段文字</strong>，它就能把对应的物体从背景中完美地“抠”出来。</li>
+<li><strong>万物皆可割：</strong> 无论是在显微镜下的细胞，还是航拍图里的建筑，它都能识别出边缘。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>模型版本</strong></th>
+<th><strong>参数量 (Parameters)</strong></th>
+<th><strong>文件大小 (Checkpoint)</strong></th>
+<th><strong>适用场景</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SAM-B (Base)</strong></td>
+<td>约 94M</td>
+<td>~375 MB</td>
+<td>速度较快，平衡性好</td>
+</tr>
+<tr>
+<td><strong>SAM-L (Large)</strong></td>
+<td>约 308M</td>
+<td>~1.2 GB</td>
+<td>精度更高，处理细节更好</td>
+</tr>
+<tr>
+<td><strong>SAM-H (Huge)</strong></td>
+<td>约 636M</td>
+<td>~2.4 GB</td>
+<td>性能最强，但计算开销最大</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>模型版本</strong></th>
+<th><strong>参数量 (Parameters)</strong></th>
+<th><strong>速度 (FPS)</strong></th>
+<th><strong>特点</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SAM 2 Tiny</strong></td>
+<td>约 38.9M</td>
+<td>~91 FPS</td>
+<td>极速，适用于移动端或嵌入式</td>
+</tr>
+<tr>
+<td><strong>SAM 2 Small</strong></td>
+<td>约 46M</td>
+<td>~85 FPS</td>
+<td>轻量级，性能优于 Tiny</td>
+</tr>
+<tr>
+<td><strong>SAM 2 Base+</strong></td>
+<td>约 80.8M</td>
+<td>~64 FPS</td>
+<td>主流选择，兼顾速度与精度</td>
+</tr>
+<tr>
+<td><strong>SAM 2 Large</strong></td>
+<td>约 224.4M</td>
+<td>~40 FPS</td>
+<td>视频追踪精度最高，支持复杂背景</td>
+</tr>
+</tbody></table>
+<p>思路尝试：GD+SAM<del>吐槽之，AI真会说话</del></p>
+<table>
+<thead>
+<tr>
+<th><strong>步骤</strong></th>
+<th><strong>操作</strong></th>
+<th><strong>产出的标注格式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>第一步</strong></td>
+<td>输入文字指令（如：”person”, “car”）</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>第二步</strong></td>
+<td><strong>Grounding DINO</strong> 扫描全图，画出方框</td>
+<td><strong>VOC &#x2F; YOLO 格式</strong> (Rectangles)</td>
+</tr>
+<tr>
+<td><strong>第三步</strong></td>
+<td>将方框传给 <strong>SAM</strong>，提取边缘轮廓</td>
+<td><strong>COCO 格式 &#x2F; Polygon</strong> (Masks)</td>
+</tr>
+</tbody></table>
+<p>如果你只需要<strong>画方框（Detection）</strong>，Grounding DINO 确实够了；但如果你需要的是<strong>像素级精度（Segmentation）或者高质量的训练集</strong>，SAM 就是不可或缺的。</p>
+<p><strong>1.为什么说 Grounding DINO “不够”？</strong></p>
+<p>Grounding DINO 只能输出 <strong>Bounding Box（边界框）</strong>。在自动标注的语境下，它存在两个致命局限：</p>
+<ul>
+<li><strong>精度粗糙：</strong> 边界框是一个矩形，它会包含大量“背景杂质”。比如你标注一只猫，方框里除了猫，还有地板、沙发角。如果你拿这种带杂质的数据去训练高要求的模型，效果会打折扣。</li>
+<li><strong>无法处理旋转&#x2F;不规则物体：</strong> 如果你要标注一根倾斜的木棒，方框会变得非常大且空旷，完全无法体现物体的真实形状。</li>
+</ul>
+<p><strong>2. SAM 的核心作用：从“框”到“形”</strong></p>
+<p>SAM 的作用不仅仅是“抠图”，它是将<strong>模糊的语义定位</strong>转化为<strong>精准的几何边界</strong>。</p>
+<ul>
+<li><strong>自动生成 Mask（掩码）：</strong> SAM 能识别物体的边缘。它可以告诉你哪些像素点属于“猫”，哪些属于“背景”。</li>
+<li><strong>生成多边形标注（Polygon）：</strong> 现在的很多高级自动驾驶或工业缺陷检测，需要的不是 <em>x</em>,<em>y</em>,<em>w</em>,<em>h</em>（方框），而是 (<em>x</em>1,<em>y</em>1,<em>x</em>2,<em>y</em>2,…) 这样的一串坐标点。SAM 可以完美生成这种数据。</li>
+</ul>
+<p><strong>3. 为什么建立“全套”自动标注系统需要它们结合？</strong></p>
+<p>我们可以把这个过程看作**“大脑”<strong>与</strong>“手术刀”**的配合：</p>
+<p><strong>第一步：Grounding DINO (大脑)</strong></p>
+<ul>
+<li><strong>任务：</strong> 读懂你的指令。</li>
+<li><strong>表现：</strong> “主人，我在坐标 [10, 20, 100, 200] 发现了一个红色杯子。”</li>
+<li><strong>产出：</strong> 一个粗略的范围。</li>
+</ul>
+<p><strong>第二步：SAM (手术刀)</strong></p>
+<ul>
+<li><strong>任务：</strong> 精细化范围。</li>
+<li><strong>表现：</strong> “收到坐标。我顺着这个范围内的像素边缘切了一圈，发现这个杯子的真实轮廓是下面这 500 个像素点。”</li>
+<li><strong>产出：</strong> 一个完美的抠图（Mask）。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>如果你的目标是…</th>
+<th>你只需要 Grounding DINO</th>
+<th>你必须结合 SAM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>训练 YOLO (目标检测)</strong></td>
+<td>✅ 足够了</td>
+<td>⚠️ 可选（用于提高框的准确度）</td>
+</tr>
+<tr>
+<td><strong>训练 Mask R-CNN (实例分割)</strong></td>
+<td>❌ 不行</td>
+<td>✅ 必须</td>
+</tr>
+<tr>
+<td><strong>抠图&#x2F;换背景 (AIGC)</strong></td>
+<td>❌ 不行</td>
+<td>✅ 必须</td>
+</tr>
+<tr>
+<td><strong>制作高精度科研数据集</strong></td>
+<td>⚠️ 勉强</td>
+<td>✅ 强烈推荐</td>
+</tr>
+</tbody></table>
+<p><strong>一句话总结：</strong> Grounding DINO 解决了**“在哪儿”<strong>的问题，而 SAM 解决了</strong>“长什么样”**的问题。</p>
+<h3 id="Florence-2"><a href="#Florence-2" class="headerlink" title="Florence-2"></a>Florence-2</h3><p>另一个模型</p>
+<p>Florence-2 借鉴了大规模语言模型（LLM）的思路：</p>
+<ul>
+<li><strong>统一表示：</strong> 将所有视觉任务（分类、检测、分割、描述等）都统一转化为<strong>文本生成任务</strong>。</li>
+<li><strong>输入：</strong> 图像 + 文本任务描述（如 <code>&lt;OD&gt;</code> 表示目标检测）。</li>
+<li><strong>输出：</strong> 统一的文本流。例如检测任务会输出坐标字符串 <code>[x1, y1, x2, y2]</code>，描述任务则输出句子。</li>
+<li><strong>架构设计：</strong> 采用经典的 Transformer 编码器-解码器结构，将视觉特征和文本特征融合后进行推理。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>版本</strong></th>
+<th><strong>参数量 (Parameters)</strong></th>
+<th><strong>权重大小</strong></th>
+<th><strong>适用设备</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Florence-2-base</strong></td>
+<td><strong>0.23B (2.3亿)</strong></td>
+<td>~500 MB</td>
+<td>手机、嵌入式设备、普通 CPU</td>
+</tr>
+<tr>
+<td><strong>Florence-2-large</strong></td>
+<td><strong>0.77B (7.7亿)</strong></td>
+<td>~1.5 GB</td>
+<td>消费级显卡、高性能实时监控</td>
+</tr>
+</tbody></table>
+<h4 id="problem"><a href="#problem" class="headerlink" title="problem"></a><strong>problem</strong></h4><p>不知道为什么florence-2-large在图中只有一个框，导致无法评估空间理解能力。</p>
+<blockquote>
+<p>仍旧没有解决</p>
+</blockquote>
+<p><strong>Florence-2 在 LIBERO 评测中的方法总报告（中文）</strong></p>
+<p>范围：汇总本轮对 Florence-2 物体识别与空间理解评测中使用过的全部方法、参数调整、排障过程与结果。</p>
+<p><strong>1.任务目标</strong></p>
+<ul>
+<li>验证 Florence-2 在 LIBERO 场景下的：</li>
+<li>物体识别与定位能力（Object + Localization）</li>
+<li>空间关系理解能力（Spatial relations）</li>
+<li>判定低分主要来自：模型能力不足，还是提示词&#x2F;评测流程设置问题。</li>
+</ul>
+<p><strong>2. 方法总览（按阶段）</strong></p>
+<p><strong>阶段 A：基础 OVD 评测（relaxed &#x2F; splitmatch &#x2F; spatialloc）</strong></p>
+<p>特点：</p>
+<ul>
+<li>任务提示为 <code>&lt;OPEN_VOCABULARY_DETECTION&gt;</code>。</li>
+<li>每图从 GT 构建开放词表。</li>
+<li>对标签匹配使用 relaxed&#x2F;canonical 策略（减少命名差异影响）。</li>
+</ul>
+<p>观察：</p>
+<ul>
+<li>splitmatch&#x2F;spatialloc 都表现为每图预测框接近 1，导致空间对数 <code>pair_count=0</code>。</li>
+</ul>
+<p><strong>阶段 B：可视化排障（pred_vis_demo）</strong></p>
+<p>问题定位：</p>
+<ul>
+<li>可视化图里框很多，但 JSON 显示 <code>num_pred</code> 很少。</li>
+<li>原因是图里叠加了 GT（绿框）+预测（红框），视觉上“多框”并不等于“多预测”。</li>
+</ul>
+<p><strong>阶段 C：提示词消融实验（30 样本）</strong></p>
+<p>对比策略：</p>
+<ul>
+<li>OVD raw+canonical 混合词表（不分块）</li>
+<li>OVD canonical-only（不分块）</li>
+<li>OVD canonical-only（<code>--ovd-chunk-size 4</code> 分块）</li>
+</ul>
+<p>结论：</p>
+<ul>
+<li>提示词设计影响非常大。</li>
+<li>raw+canonical 混合词表显著劣化。</li>
+<li>canonical-only 明显提升。</li>
+<li>分块可提升每图预测框数量，使空间评估从“完全不可评估”向“可评估”迈进。</li>
+</ul>
+<p><strong>阶段 D：提示词修正迭代（90 样本）</strong></p>
+<p>迭代过程：</p>
+<ul>
+<li>失败版：在 OVD 提示里加入自然语言指令后缀，导致指令文本泄漏进预测标签，性能下降。</li>
+<li>最终版：采用结构化简洁词表格式，不附加长自然语言指令。</li>
+</ul>
+<p>当前脚本中的最终提示词构造：</p>
+<ul>
+<li>每图词表拼接方式改为 <code>|</code> 分隔（而非冗长自然语言句子）</li>
+</ul>
+<p><strong>3. 综合诊断</strong></p>
+<p><strong>3.1 哪些是“提示词&#x2F;流程问题”</strong></p>
+<ul>
+<li>OVD 提示词过长、混入自然语言指令时，模型容易把整段文本污染进标签。</li>
+<li>raw+canonical 同时喂入会增加混淆，导致召回与标签质量下降。</li>
+<li>可视化若叠加 GT 与预测，容易误判“模型预测很多框”。</li>
+</ul>
+<p><strong>3.2 哪些是“模型能力瓶颈”</strong></p>
+<ul>
+<li>即使提示词优化后，召回仍不高（90 样本最终 <code>R=0.1262</code>）。</li>
+<li>多实例稳定检出仍不足，导致空间关系可评估样本数非常少（<code>pair_count</code> 仅从 0 提升到 1）。</li>
+</ul>
+<p>结论：</p>
+<ul>
+<li>低分并非单一原因。</li>
+<li>提示词与流程是“可修复的大头”；修完后模型明显变好。</li>
+<li>但若目标是“稳定空间推理”，当前 Florence-2 管线仍受多实例召回限制。</li>
+</ul>
+<p><strong>4. 后续建议</strong></p>
+<ul>
+<li>若主要目标是空间理解评测：优先换高召回检测器（或先做检测器蒸馏&#x2F;微调），再在检测框上做关系计算。</li>
+<li>若继续使用 Florence-2：</li>
+<li>保持结构化短提示词（<code>|</code> 词表）</li>
+<li>禁用 raw 词并保留 canonical</li>
+<li>继续尝试 chunk size（3&#x2F;4&#x2F;5）和 merge IoU（0.5&#x2F;0.6&#x2F;0.7）网格搜索</li>
+</ul>
+<h3 id="测试GT生成"><a href="#测试GT生成" class="headerlink" title="测试GT生成"></a>测试GT生成</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>采样 HDF5 数据</strong></td>
+<td>从 LIBERO 数据集中随机抽取视频帧</td>
+</tr>
+<tr>
+<td><strong>重建仿真状态</strong></td>
+<td>用 MuJoCo 恢复每一帧的 3D 场景状态</td>
+</tr>
+<tr>
+<td><strong>3D→2D 投影</strong></td>
+<td>将物体中心点从世界坐标投影到图像平面</td>
+</tr>
+<tr>
+<td><strong>生成 BBox 标注</strong></td>
+<td>支持分割图（instance mask）或点投影两种方式</td>
+</tr>
+<tr>
+<td><strong>输出 COCO 格式</strong></td>
+<td>生成标准的目标检测数据集格式</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">conda acitvate libero_new</span><br><span class="line">python3 scripts/sample_libero_objects_gt.py \</span><br><span class="line">  --dataset-root /home/whl/libero/LIBERO/datasets \</span><br><span class="line">  --dataset-names libero_goal,libero_object,libero_spatial,libero_10 \</span><br><span class="line">  --num-samples 10 \</span><br><span class="line">  --bbox-mode segmentation \</span><br><span class="line">  --fallback-to-point-bbox \</span><br><span class="line">  --require-visible \</span><br><span class="line">  --save-vis /home/whl/libero/finetune_data/pool/my_vis \</span><br><span class="line">  --output-root /home/whl/libero/finetune_data/pool</span><br></pre></td></tr></table></figure>
+
+<p>这个命令是在做一套“LIBERO 图像多物体GT 生成流程”。逐项解释如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 scripts/sample_libero_objects_gt.py</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行你现在这份脚本。</li>
+<li>脚本会从 HDF5 抽帧、恢复仿真状态、生成每帧多物体2D标注。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--dataset-root /home/whl/libero/LIBERO/datasets</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定 LIBERO 原始 HDF5 数据根目录。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--dataset-names libero_goal,libero_object,libero_spatial,libero_10</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定要从哪几个子数据集采样。</li>
+<li>这里是四个都用上了。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--num-samples 500</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在所有候选帧中随机抽 500 帧（全局随机，不是每个任务固定500）。</li>
+<li>实际输出可能少于500（例如被 [–require-visible](vscode-file:&#x2F;&#x2F;vscode-app&#x2F;d:&#x2F;Microsoft VS Code&#x2F;0870c2a0c7&#x2F;resources&#x2F;app&#x2F;out&#x2F;vs&#x2F;code&#x2F;electron-browser&#x2F;workbench&#x2F;workbench.html) 过滤）。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--bbox-mode segmentation</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>优先用实例分割掩码生成真实2D外接框（不是点附近小框）。</li>
+<li>这是你现在想要的“真实bbox”模式。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--fallback-to-point-bbox</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当某个物体拿不到有效分割框时，回退到“3D点投影+小框”。</li>
+<li>回退样本会在标注里标记 <code>bbox_source=point_fallback</code>。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--require-visible</span><br></pre></td></tr></table></figure>
+
+<p>[–require-visible](vscode-file:&#x2F;&#x2F;vscode-app&#x2F;d:&#x2F;Microsoft VS Code&#x2F;0870c2a0c7&#x2F;resources&#x2F;app&#x2F;out&#x2F;vs&#x2F;code&#x2F;electron-browser&#x2F;workbench&#x2F;workbench.html)</p>
+<ul>
+<li>只保留有可见有效标注的样本。</li>
+<li>看不到&#x2F;投影不在图内的不会输出到最终数据集。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--save-vis</span><br></pre></td></tr></table></figure>
+
+<p>[–save-vis](vscode-file:&#x2F;&#x2F;vscode-app&#x2F;d:&#x2F;Microsoft VS Code&#x2F;0870c2a0c7&#x2F;resources&#x2F;app&#x2F;out&#x2F;vs&#x2F;code&#x2F;electron-browser&#x2F;workbench&#x2F;workbench.html)</p>
+<ul>
+<li>额外保存可视化图（画出框和标签）到 <code>vis/</code> 目录，便于人工检查质量。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--output-root /home/whl/libero/finetune_data/florence2_objects_eval</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>输出目录。</li>
+<li>主要会生成：<ul>
+<li><code>images/</code>：抽样帧图片</li>
+<li><code>samples.jsonl</code>：每张图的详细标注（含3D点、2D框、来源等）</li>
+<li>[gt_coco.json](vscode-file:&#x2F;&#x2F;vscode-app&#x2F;d:&#x2F;Microsoft VS Code&#x2F;0870c2a0c7&#x2F;resources&#x2F;app&#x2F;out&#x2F;vs&#x2F;code&#x2F;electron-browser&#x2F;workbench&#x2F;workbench.html)：COCO格式标注</li>
+<li><code>vis/</code>：可视化图（因为你开了 [–save-vis](vscode-file:&#x2F;&#x2F;vscode-app&#x2F;d:&#x2F;Microsoft VS Code&#x2F;0870c2a0c7&#x2F;resources&#x2F;app&#x2F;out&#x2F;vs&#x2F;code&#x2F;electron-browser&#x2F;workbench&#x2F;workbench.html)）</li>
+</ul>
+</li>
+</ul>
+<h2 id="GD-problem"><a href="#GD-problem" class="headerlink" title="GD-problem"></a>GD-problem</h2><h3 id="数据集缺失"><a href="#数据集缺失" class="headerlink" title="数据集缺失"></a>数据集缺失</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">源池里先天缺 5 类，从 balance<span class="emphasis">_report.json 看，缺失的是：</span></span><br><span class="line"><span class="emphasis">- floor</span></span><br><span class="line"><span class="emphasis">- kitchen_</span>table</span><br><span class="line"><span class="bullet">-</span> living<span class="emphasis">_room_</span>table</span><br><span class="line"><span class="bullet">-</span> study<span class="emphasis">_table</span></span><br><span class="line"><span class="emphasis">- table</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="MUJOCO-log问题-配置libero仿真环境"><a href="#MUJOCO-log问题-配置libero仿真环境" class="headerlink" title="MUJOCO log问题-配置libero仿真环境"></a>MUJOCO log问题-配置libero仿真环境</h3><p>下面只是列一下问题，没有任何价值哈哈哈哈</p>
+<p>环境配置问题，去看他们的<code>Readme</code></p>
+<p>去官网看<code>Readme</code>解决了</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Lifelong-Robot-Learning/LIBERO">Lifelong-Robot-Learning&#x2F;LIBERO: Benchmarking Knowledge Transfer in Lifelong Robot Learning</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mit-han-lab/vlash">mit-han-lab&#x2F;vlash: Real-Time VLAs via Future-state-aware Asynchronous Inference.</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Tue Mar 24 16:56:42 2026</span><br><span class="line">WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.5000.</span><br><span class="line"></span><br><span class="line">Tue Mar 24 16:57:50 2026</span><br><span class="line">WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.5000.</span><br><span class="line"></span><br><span class="line">Tue Mar 24 16:58:55 2026</span><br><span class="line">WARNING: Nan, Inf or huge value in CTRL at ACTUATOR 0. The simulation is unstable. Time = 0.5000.</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...(大约两百行)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">仿真有问题。</span><br><span class="line">日志反复出现：Detected non-finite actions (count=7). Replacing with 0.0000。这表示动作向量（7 维）出现 NaN/Inf</span><br><span class="line">日志里“before unnormalize”完全没有命中，而“after unnormalize”从第 0 步就出现，说明异常值是在反归一化阶段引入</span><br><span class="line">评估默认跳过 dataset stats，导致反归一化参数未初始化，动作在 after unnormalize 变成非有限值。</span><br><span class="line">评估时没有可用的 dataset stats，导致 PI05 反归一化参数未初始化，动作在 unnormalize 后变成非有限值。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">已做的修复（未改 adaptive 逻辑）：</span><br><span class="line"></span><br><span class="line">在评估脚本新增本地 stats 回退加载函数，从 policy 目录读取 processor safetensors 并组装为 dataset_stats。</span><br><span class="line">evalpi05_adaptivefine_norm.py:48</span><br><span class="line">evalpi05_adaptivefine_norm.py:79</span><br><span class="line"></span><br><span class="line">在 run_benchmark_common 里，当 dataset stats 被跳过或加载失败时，自动走本地 policy stats 回退。</span><br><span class="line">evalpi05_adaptivefine_norm.py:1339</span><br><span class="line">evalpi05_adaptivefine_norm.py:1352</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="A-step"><a href="#A-step" class="headerlink" title="A.step"></a>A.step</h2><p>1、随机抽取图像帧</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">conda acitvate libero_new</span><br><span class="line">python3 scripts/sample_libero_objects_gt.py \</span><br><span class="line">  --dataset-root /home/whl/libero/LIBERO/datasets \</span><br><span class="line">  --dataset-names libero_goal,libero_object,libero_spatial,libero_10 \</span><br><span class="line">  --num-samples 2500 \</span><br><span class="line">  --bbox-mode segmentation \</span><br><span class="line">  --fallback-to-point-bbox \</span><br><span class="line">  --require-visible \</span><br><span class="line">  --save-vis /home/whl/libero/finetune_data/pool3/my_vis \</span><br><span class="line">  --output-root /home/whl/libero/finetune_data/pool3</span><br></pre></td></tr></table></figure>
+
+<p>2、从中抽取最后的对比测试集（用于base和best的对比）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">conda avtivate gd_eval</span><br><span class="line">python scripts/build_holdout_from_samples.py \</span><br><span class="line">  --source-samples finetune_data/pool3/samples.jsonl \</span><br><span class="line">  --num-samples 500 \</span><br><span class="line">  --seed 42 \</span><br><span class="line">  --dedup-mode frame \</span><br><span class="line">  --output-root finetune_data/pool3_test_base_best \</span><br><span class="line">  --save-train-samples finetune_data/pool3_train_samples.jsonl \</span><br><span class="line">  --copy-vis-dirs my_vis</span><br></pre></td></tr></table></figure>
+
+<p>3、还原出train集</p>
+<p>因为上一步只是生成了<code>train_samples.jsonl</code>文件，并没有抽出相应的img到新的文件夹中，而后面准备训练集的时候需要一个文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">conda activate gd_eval</span><br><span class="line">python scripts/build_holdout_from_samples.py \</span><br><span class="line">--source-samples finetune_data/pool3_train_samples.jsonl \</span><br><span class="line">--num-samples 999999 \</span><br><span class="line">--seed 42 \</span><br><span class="line">--dedup-mode none \</span><br><span class="line">--output-root finetune_data/pool3_train \</span><br><span class="line">--copy-vis-dirs my_vis</span><br></pre></td></tr></table></figure>
+
+<p>4、准备训练集</p>
+<p>生成训练数据索引，你已有 gt_coco.json 和 images 后，执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate gd_finetune</span><br><span class="line">python3 scripts/prepare_gdino_finetune_data.py --dataset-dir /home/whl/libero/finetune_data/pool3_train --train-ratio 0.9 --seed 42</span><br></pre></td></tr></table></figure>
+
+<p>5、对比测试</p>
+<p>参考<a href="#B.TRAIN">ref_B</a>和<a href="#C.TEST">ref_C</a></p>
+<p>6、指标分析</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conda activate gd_eval</span><br><span class="line">python scripts/compare_gdino_reports_with_gt.py 	\</span><br><span class="line">--base-report /home/whl/libero/finetune_data/pool3_test_base_best/compare_2-3vs3/gdino_train_2-3_mmdet_backend.json	\</span><br><span class="line">--best-report /home/whl/libero/finetune_data/pool3_test_base_best/compare_2-3vs3/gdino_train_3_mmdet_backend.json	\</span><br><span class="line">--gt-coco finetune_data/pool3_test_base_best/gt_coco.json 	\</span><br><span class="line">--output-json /home/whl/libero/finetune_data/pool3_test_base_best/compare_2-3vs3/gdino_compare_summary.json 	\</span><br><span class="line">--output-md /home/whl/libero/finetune_data/pool3_test_base_best/compare_2-3vs3/gdino_compare_summary.md</span><br></pre></td></tr></table></figure>
+
+<p>7、模型转换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda activate gd_finetune</span><br><span class="line">python scripts/mmdet2dino.py	\</span><br><span class="line">/home/whl/libero/work_dirs/gdino_train_3/best_coco_bbox_mAP_epoch_140.pth	\</span><br><span class="line">/home/whl/libero/finetune_models/20260320_train3_best.pth</span><br></pre></td></tr></table></figure>
+
+<p>附1.可视化</p>
+<p><a href="#I.visualization">visual</a></p>
+<h2 id="B-TRAIN"><a href="#B-TRAIN" class="headerlink" title="B.TRAIN"></a>B.TRAIN</h2><p>完整微调流程（从 0 到评估）</p>
+<p>1.准备环境</p>
+<ul>
+<li><p>创建并激活环境。</p>
+</li>
+<li><p>运行安装脚本安装 <code>PyTorch</code>、<code>MMDetection</code>、依赖和权重：<br><code>bash scripts/mmdet_setup.sh</code></p>
+</li>
+<li><p>如需指定环境和数据目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GD_ENV=gd_finetune DATASET_DIR=/home/whl/libero/finetune_data/test_obj1 bash scripts/mmdet_setup.sh</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>2.生成训练数据索引</p>
+<ul>
+<li><p>你已有 gt_coco.json 和 images 后，执行：</p>
+</li>
+<li><pre><code class="language-bash">python3 scripts/prepare_gdino_finetune_data.py --dataset-dir /home/whl/libero/finetune_data/test_obj1 --train-ratio 0.9 --seed 42
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 会产出：</span><br><span class="line">  `train_annotations.json`</span><br><span class="line">  `val_annotations.json`</span><br><span class="line">  `dataset_config.json`</span><br><span class="line"></span><br><span class="line">3.启动微调</span><br><span class="line"></span><br><span class="line">- 用训练脚本：</span><br><span class="line"></span><br><span class="line">- ```bash</span><br><span class="line">  python3 scripts/train_mmdet_gdino.py --dataset-config /home/whl/libero/finetune_data/pool3_train/mmdet_data/dataset_config.json --work-dir /home/whl/libero/work_dirs/gdino_train_3</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>当前脚本已切到 Swin-B，并使用 MMDetection 的 Swin-B 预训练权重。</p>
+</li>
+</ul>
+<p>4.训练中看什么</p>
+<ul>
+<li><p>终端重点看：</p>
+</li>
+<li><pre><code>coco/bbox_mAP
+coco/bbox_mAP_50
+coco/bbox_mAP_75
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 训练日志和模型输出都在你指定的 work-dir 下。</span><br><span class="line"></span><br><span class="line">5.训练产物在哪里</span><br><span class="line"></span><br><span class="line">- 在 `work-dir` 下通常会有：</span><br><span class="line">  `train_config.py`</span><br><span class="line">  `epoch_*.pth`</span><br><span class="line">  `best_coco_bbox_mAP_epoch_*.pth（或同义 best 命名）`</span><br><span class="line">  `日志文件（含每次验证指标）`</span><br><span class="line"></span><br><span class="line">6.怎么判断效果好不好</span><br><span class="line"></span><br><span class="line">- 先看 best 的 coco/bbox_mAP 是否高于基线。</span><br><span class="line">- 再看 mAP_50 与 mAP_75 是否同步提升（只升 mAP_50 往往说明定位精度还不够）。</span><br><span class="line">- 最后用 best 权重在验证集或独立测试集跑一次完整评测，确认不是偶然波动。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## C.TEST</span><br><span class="line"></span><br><span class="line">使用`mmdet`后端(可以使用`groundingdino`后端)：</span><br><span class="line"></span><br><span class="line">`best`</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">conda run -n gd_eval env PYTHONPATH=/home/whl/libero/scripts </span><br><span class="line">python scripts/eval_gdino_libero.py 	\</span><br><span class="line">--inference-backend mmdet 	\</span><br><span class="line">--samples-jsonl /home/whl/libero/finetune_data/pool3_test_base_best/samples.jsonl 	\</span><br><span class="line">--images-root /home/whl/libero/finetune_data/pool3_test_base_best	\</span><br><span class="line">--config-file /home/whl/libero/work_dirs/gdino_train_3/train_config.py 	\</span><br><span class="line">--checkpoint-path /home/whl/libero/work_dirs/gdino_train_3/best_coco_bbox_mAP_epoch_140.pth	\</span><br><span class="line">--box-threshold 0.05 	\</span><br><span class="line">--output-json /home/whl/libero/finetune_data/pool3_test_base_best/compare_2-3vs3/gdino_train_3_mmdet_backend.json</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<p><code>base</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">conda run -n gd_eval <span class="built_in">env</span> PYTHONPATH=/home/whl/libero/scripts </span><br><span class="line">python scripts/eval_gdino_libero.py --inference-backend mmdet	\</span><br><span class="line">--samples-jsonl /home/whl/libero/finetune_data/pool2_test_base_best/samples.jsonl 	\</span><br><span class="line">--images-root /home/whl/libero/finetune_data/pool2_test_base_best	\</span><br><span class="line">--config-file /home/whl/libero/work_dirs/gdino_train_2/train_config.py 	\</span><br><span class="line">--checkpoint-path /home/whl/libero/work_dirs/gdino_train_2_2/best_coco_bbox_mAP_epoch_120.pth	\</span><br><span class="line">--box-threshold 0.05	\</span><br><span class="line">--output-json /home/whl/libero/finetune_data/pool2_test_base_best/compare2_2/gdino_base_mmdet_backend.json</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>--inference-backend mmdet</code>：使用 MMDetection 推理路径（适配你这类微调 checkpoint）。</li>
+<li><code>--samples-jsonl</code>：待评测样本清单（每行一个样本，含图像与目标信息）。</li>
+<li><code>--images-root</code>：图像根目录，与 <code>samples.jsonl</code> 里的相对路径拼接。</li>
+<li><code>--config-file</code>：模型结构和推理配置文件。这里用微调时配置 [train_config.py](vscode-file:&#x2F;&#x2F;vscode-app&#x2F;d:&#x2F;Microsoft VS Code&#x2F;ce099c1ed2&#x2F;resources&#x2F;app&#x2F;out&#x2F;vs&#x2F;code&#x2F;electron-browser&#x2F;workbench&#x2F;workbench.html) 做公平对比。</li>
+<li><code>--checkpoint-path</code>：权重文件路径。你分别放 base 与 best90。</li>
+<li><code>--box-threshold</code>：框置信度阈值，越低召回越高但误检也可能更多。你设 <code>0.05</code> 偏召回导向。</li>
+<li><code>--output-json</code>：评估结果输出文件。</li>
+</ul>
+<p>去重：（挑出train集和test集）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python scripts/build_holdout_from_samples.py	\</span><br><span class="line">--source-samples finetune_data/pool/samples.jsonl	\</span><br><span class="line">--exclude-samples /home/whl/libero/finetune_data/test_obj1/samples.jsonl	\</span><br><span class="line">--num-samples 200	\</span><br><span class="line">--seed 42	\</span><br><span class="line">--dedup-mode frame	\</span><br><span class="line">--output-root finetune_data/holdout_200_dedup	\</span><br><span class="line">--save-train-samples finetune_data/train_samples.jsonl</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>python build_holdout_from_samples.py</code><br>运行你新建的脚本：<code>build_holdout_from_samples.py</code></li>
+<li><code>--source-samples finetune_data/holdout_pool/samples.jsonl</code><br>输入来源的样本清单（从哪里抽）。<br>这里是从 <code>finetune_data/holdout_pool/samples.jsonl</code> 里抽。</li>
+<li><code>--num-samples 200</code><br>最终抽多少张图。</li>
+<li><code>--seed 42</code><br>随机种子，保证可复现。相同输入+相同 seed，抽样结果一致。</li>
+<li><code>--dedup-mode none</code><br>不和训练&#x2F;验证做排重。<br>注意：脚本默认仍会避免“输出内部同一帧重复”，除非你再加 <code>--allow-duplicate-within-output</code>。</li>
+<li><code>--output-root finetune_data/holdout_200_nodedup</code><br>输出目录。会生成 <code>images</code>、<code>samples.jsonl</code>、<code>gt_coco.json</code>。</li>
+<li><code>--exclude-samples</code> 是“排除名单”的输入参数。</li>
+</ol>
+<ul>
+<li>你把一个或多个 <code>samples.jsonl</code> 传给它。<ul>
+<li>脚本会读取这些文件里的每条样本键：<code>(hdf5_path, demo_key, frame_idx)</code>。</li>
+</ul>
+</li>
+<li>当 <code>--dedup-mode frame</code> 时，凡是命中这些键的候选样本都会被跳过。<ul>
+<li>结果就是“尽量不和这些已知集合重叠”。</li>
+</ul>
+</li>
+</ul>
+<h2 id="D-tmux-ssh"><a href="#D-tmux-ssh" class="headerlink" title="D.tmux+ssh"></a>D.tmux+ssh</h2><p><strong>基础操作流程</strong></p>
+<ol>
+<li>SSH 登录远程服务器</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@remote-server-ip</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建 tmux 会话</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建新会话（建议用训练任务命名）</span></span><br><span class="line">tmux new -s training-session</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者简写</span></span><br><span class="line">tmux new -s train-resnet</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在 tmux 会话中运行训练</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 激活环境（如需要）</span></span><br><span class="line">conda activate pytorch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行训练脚本</span></span><br><span class="line">python train.py --epochs 100 --batch-size 32 --lr 0.001</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>分离会话（后台运行）</li>
+</ol>
+<p>按 <code>Ctrl + b</code>，然后按 <code>d</code>（detach）</p>
+<p>此时你可以安全关闭 SSH 连接，训练继续运行。</p>
+<ol start="5">
+<li>重新连接查看进度</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新 SSH 登录后，重新附加会话</span></span><br><span class="line">tmux attach -t training-session</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简写</span></span><br><span class="line">tmux a -t train-resnet</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="E-env-save-and-rebuild"><a href="#E-env-save-and-rebuild" class="headerlink" title="E.env save and rebuild"></a>E.env save and rebuild</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scripts/gd_eval_env_conda.yml</span><br><span class="line">scripts/gd_finetune_env_conda.yml</span><br><span class="line">scripts/libero_new_env_conda.yml</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.只导包列表（最小化）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅列出conda安装的包</span></span><br><span class="line">conda list --explicit &gt; spec-file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或更简洁的列表,跨平台或不同 Python 版本时会报错</span></span><br><span class="line">conda list -e &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>重建：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name new_env --file spec-file.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.导出 pip 专用格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果主要用pip管理包</span></span><br><span class="line">pip list --format=freeze &gt; requirements.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或更详细（包含版本限制）</span></span><br><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>重建：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.使用 <code>env export</code>（最通用）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导出（跨平台兼容）</span></span><br><span class="line">conda <span class="built_in">env</span> <span class="built_in">export</span> -n libero --no-builds &gt; environment.yml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重建</span></span><br><span class="line">conda <span class="built_in">env</span> create -f environment.yml -n new_env_name</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="F-visualization"><a href="#F-visualization" class="headerlink" title="F.visualization"></a>F.visualization</h2><p>单日志，自动选指标：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python scripts/plot_training_curves.py --log-file /home/whl/libero/work_dirs/gdino_train_2_2/20260318_082145/20260318_082145.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+<p>单日志，只画指定指标：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python scripts/plot_training_curves.py 	\</span><br><span class="line">--log-file /home/whl/libero/work_dirs/gdino_train_3/20260320_204326/20260320_204326.<span class="built_in">log</span>	\</span><br><span class="line">--train-keys loss,loss_cls,loss_bbox,loss_iou 	\</span><br><span class="line">--val-keys coco/bbox_mAP,coco/bbox_mAP_50 	\</span><br><span class="line">--out-dir /home/whl/libero/work_dirs/gdino_train_3/20260320_204326/curve_vis_custom</span><br></pre></td></tr></table></figure>
+
+<p>单日志，排除部分指标：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python scripts/plot_training_curves.py 	\</span><br><span class="line">--log-file 20260317_214457.<span class="built_in">log</span> 	\</span><br><span class="line">--exclude-train-keys lr,base_lr 	\</span><br><span class="line">--exclude-val-keys coco/bbox_mAP_l,coco/bbox_mAP_m,coco/bbox_mAP_s</span><br></pre></td></tr></table></figure>
+
+<p>多日志对比：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python scripts/plot_training_curves.py --compare \</span><br><span class="line">--log-files work_dirs/gdino_train_2/20260317_214457/20260317_214457.<span class="built_in">log</span>,/home/whl/libero/work_dirs/gdino_train_1/20260313_181448/20260313_181448.<span class="built_in">log</span>	\</span><br><span class="line">--train-keys loss,loss_cls 	\</span><br><span class="line">--val-keys coco/bbox_mAP 	\</span><br><span class="line">--out-dir work_dirs/compare_runs_1v2</span><br></pre></td></tr></table></figure>
+
+
+
+<p>J.平衡各个类别的频率</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python scripts/rebalance_samples_by_category.py 	\</span><br><span class="line">--source-samples /home/whl/libero/finetune_data/pool2_train/samples.jsonl /home/whl/libero/finetune_data/pool_1/samples.jsonl 	\</span><br><span class="line">--output-root finetune_data/pool2_rebalanced_v1 	\</span><br><span class="line">--seed 42 	\</span><br><span class="line">--target-per-class 0 	\</span><br><span class="line">--tolerance 0.15 	\</span><br><span class="line">--copy-mode hardlink 	\</span><br><span class="line">--category-universe source_gt</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/internship/">internship</a></div><div class="post-share"><div class="social-share" data-image="/img/head.jpg" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/02/15/pi-0.5/" title="π0.5:a Vision-Language-Action Model with Open-World Generalization"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">π0.5:a Vision-Language-Action Model with Open-World Generalization</div></div><div class="info-2"><div class="info-item-1">一个基于视觉-语言-动作模型的开放世界泛化模型</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Wamingmo</div><div class="author-info-description">碎碎念</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wamingmo"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">If you need to copy, please indicate the source. Thank you!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95GroundingDINO%E7%AD%89%E5%90%84%E6%A8%A1%E5%9E%8B%E5%9C%A8LIBERO%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8A%E7%9A%84%E8%A1%A8%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">测试GroundingDINO等各模型在LIBERO数据集上的表现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%8C%87%E6%A0%87"><span class="toc-number">1.1.</span> <span class="toc-text">一些指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%B6%85%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">一些超参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86libero%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E6%8A%95%E5%BD%B1%E5%88%B02d%E7%94%9F%E6%88%90%E6%B5%8B%E8%AF%95GT%E2%80%93%E5%8F%AF%E8%A1%8C"><span class="toc-number">1.3.</span> <span class="toc-text">将libero的数据集投影到2d生成测试GT–可行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grounding-DINO"><span class="toc-number">1.4.</span> <span class="toc-text">Grounding DINO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAM"><span class="toc-number">1.5.</span> <span class="toc-text">SAM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Florence-2"><span class="toc-number">1.6.</span> <span class="toc-text">Florence-2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#problem"><span class="toc-number">1.6.1.</span> <span class="toc-text">problem</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95GT%E7%94%9F%E6%88%90"><span class="toc-number">1.7.</span> <span class="toc-text">测试GT生成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GD-problem"><span class="toc-number">2.</span> <span class="toc-text">GD-problem</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BC%BA%E5%A4%B1"><span class="toc-number">2.1.</span> <span class="toc-text">数据集缺失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MUJOCO-log%E9%97%AE%E9%A2%98-%E9%85%8D%E7%BD%AElibero%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83"><span class="toc-number">2.2.</span> <span class="toc-text">MUJOCO log问题-配置libero仿真环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-step"><span class="toc-number">3.</span> <span class="toc-text">A.step</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-TRAIN"><span class="toc-number">4.</span> <span class="toc-text">B.TRAIN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-tmux-ssh"><span class="toc-number">5.</span> <span class="toc-text">D.tmux+ssh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E-env-save-and-rebuild"><span class="toc-number">6.</span> <span class="toc-text">E.env save and rebuild</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#F-visualization"><span class="toc-number">7.</span> <span class="toc-text">F.visualization</span></a></li></ol></div></div></div></div></main></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"id":"location.pathname"}
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'Ov23liuq0QQhhUlLLV2T',
+      clientSecret: '72442c345b287ef76dad7d76af842044ee69bca0',
+      repo: 'gitalk-comments',
+      owner: 'wamingmo',
+      admin: ['wamingmo'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '10b97d9e6cc49a684d227afb818ab3dc'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Gitalk' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Gitalk' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div></div></body></html>
