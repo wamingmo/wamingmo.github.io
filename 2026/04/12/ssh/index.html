@@ -1,0 +1,321 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SSH简介 | My Love</title><meta name="author" content="Wamingmo"><meta name="copyright" content="Wamingmo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="SSH（Secure Shell）是一种加密网络协议，用于在不安全的网络中安全地进行远程登录和命令执行，替代了早期的明文传输协议 Telnet。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH简介">
+<meta property="og:url" content="http://example.com/2026/04/12/ssh/index.html">
+<meta property="og:site_name" content="My Love">
+<meta property="og:description" content="SSH（Secure Shell）是一种加密网络协议，用于在不安全的网络中安全地进行远程登录和命令执行，替代了早期的明文传输协议 Telnet。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/head.jpg">
+<meta property="article:published_time" content="2026-04-12T02:37:08.414Z">
+<meta property="article:modified_time" content="2026-04-12T02:38:35.376Z">
+<meta property="article:author" content="Wamingmo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SSH简介",
+  "url": "http://example.com/2026/04/12/ssh/",
+  "image": "http://example.com/img/head.jpg",
+  "datePublished": "2026-04-12T02:37:08.414Z",
+  "dateModified": "2026-04-12T02:38:35.376Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Wamingmo",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/04/12/ssh/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SSH简介',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">My Love</span></a><a class="nav-page-title" href="/"><span class="site-name">SSH简介</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">SSH简介</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-04-12T02:37:08.414Z" title="Created 2026-04-12 10:37:08">2026-04-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-04-12T02:38:35.376Z" title="Updated 2026-04-12 10:38:35">2026-04-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">635</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>2mins</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>SSH 客户端配置文件（<code>~/.ssh/config</code>）的语法结构清晰简洁，主要由 <strong>Host 匹配块</strong> 和 <strong>配置指令</strong> 组成。</p>
+<h2 id="1-基本语法结构"><a href="#1-基本语法结构" class="headerlink" title="1. 基本语法结构"></a>1. 基本语法结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host 别名/匹配模式</span><br><span class="line">    指令 值</span><br><span class="line">    指令 值</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Host 行</strong>：定义匹配条件，可以是一个别名、主机名或通配符模式</li>
+<li><strong>配置行</strong>：以 <code>Key Value</code> 形式书写，缩进（空格或 Tab）表示属于上方 Host</li>
+<li><strong>注释</strong>：以 <code>#</code> 开头</li>
+</ul>
+<h2 id="2-常用配置指令"><a href="#2-常用配置指令" class="headerlink" title="2. 常用配置指令"></a>2. 常用配置指令</h2><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>HostName</code></td>
+<td>真实主机地址（IP 或域名）</td>
+<td><code>HostName 192.168.1.100</code></td>
+</tr>
+<tr>
+<td><code>User</code></td>
+<td>登录用户名</td>
+<td><code>User ubuntu</code></td>
+</tr>
+<tr>
+<td><code>Port</code></td>
+<td>SSH 端口（默认 22）</td>
+<td><code>Port 2222</code></td>
+</tr>
+<tr>
+<td><code>IdentityFile</code></td>
+<td>私钥路径</td>
+<td><code>IdentityFile ~/.ssh/id_rsa</code></td>
+</tr>
+<tr>
+<td><code>ProxyJump</code></td>
+<td>跳板机&#x2F;堡垒机</td>
+<td><code>ProxyJump jump-server</code> 或 <code>user@jump:22</code></td>
+</tr>
+<tr>
+<td><code>ForwardAgent</code></td>
+<td>开启 Agent 转发</td>
+<td><code>ForwardAgent yes</code></td>
+</tr>
+<tr>
+<td><code>LocalForward</code></td>
+<td>本地端口转发</td>
+<td><code>LocalForward 8080 localhost:80</code></td>
+</tr>
+<tr>
+<td><code>RemoteForward</code></td>
+<td>远程端口转发</td>
+<td><code>RemoteForward 9090 localhost:3000</code></td>
+</tr>
+<tr>
+<td><code>ServerAliveInterval</code></td>
+<td>心跳检测间隔（秒）</td>
+<td><code>ServerAliveInterval 60</code></td>
+</tr>
+<tr>
+<td><code>StrictHostKeyChecking</code></td>
+<td>是否严格检查主机密钥</td>
+<td><code>StrictHostKeyChecking no</code></td>
+</tr>
+<tr>
+<td><code>IdentitiesOnly</code></td>
+<td>仅使用指定密钥</td>
+<td><code>IdentitiesOnly yes</code></td>
+</tr>
+<tr>
+<td><code>AddKeysToAgent</code></td>
+<td>自动将密钥加入 ssh-agent</td>
+<td><code>AddKeysToAgent yes</code></td>
+</tr>
+</tbody></table>
+<h2 id="3-通配符匹配"><a href="#3-通配符匹配" class="headerlink" title="3. 通配符匹配"></a>3. 通配符匹配</h2><p>Host 支持使用通配符实现批量配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 匹配所有 .github.com 子域名</span><br><span class="line">Host *.github.com</span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/github_key</span><br><span class="line"></span><br><span class="line"># 匹配所有以 lab- 开头的主机</span><br><span class="line">Host lab-*</span><br><span class="line">    User student</span><br><span class="line">    StrictHostKeyChecking no</span><br><span class="line"></span><br><span class="line"># 匹配所有主机（全局默认值，通常放文件末尾）</span><br><span class="line">Host *</span><br><span class="line">    ServerAliveInterval 60</span><br><span class="line">    ServerAliveCountMax 3</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-完整示例"><a href="#4-完整示例" class="headerlink" title="4. 完整示例"></a>4. 完整示例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 公司跳板机</span><br><span class="line">Host jump</span><br><span class="line">    HostName jump.company.com</span><br><span class="line">    User admin</span><br><span class="line">    Port 2222</span><br><span class="line">    IdentityFile ~/.ssh/jump_key</span><br><span class="line"></span><br><span class="line"># 通过跳板机连接内网服务器</span><br><span class="line">Host web-server</span><br><span class="line">    HostName 10.0.1.50</span><br><span class="line">    User ubuntu</span><br><span class="line">    IdentityFile ~/.ssh/internal_key</span><br><span class="line">    ProxyJump jump</span><br><span class="line">    LocalForward 3306 localhost:3306  # 转发 MySQL 端口</span><br><span class="line"></span><br><span class="line"># GitHub 专用配置</span><br><span class="line">Host github.com</span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/github_ed25519</span><br><span class="line">    IdentitiesOnly yes</span><br><span class="line"></span><br><span class="line"># 实验室服务器群组</span><br><span class="line">Host lab-01 lab-02 lab-03</span><br><span class="line">    HostName %h.university.edu.cn  # %h 会被替换为实际匹配的名称</span><br><span class="line">    User researcher</span><br><span class="line">    ServerAliveInterval 30</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-特殊变量"><a href="#5-特殊变量" class="headerlink" title="5. 特殊变量"></a>5. 特殊变量</h2><p>在配置值中可使用以下占位符：</p>
+<ul>
+<li><strong><code>%h</code></strong>：被替换为 Host 行匹配的主机名</li>
+<li><strong><code>%u</code></strong>：本地用户名</li>
+<li><strong><code>%p</code></strong>：端口</li>
+<li><strong><code>%r</code></strong>：远程用户名</li>
+</ul>
+<h2 id="6-配置继承规则"><a href="#6-配置继承规则" class="headerlink" title="6. 配置继承规则"></a>6. 配置继承规则</h2><ul>
+<li>配置文件<strong>从上到下</strong>解析，<strong>第一个匹配</strong>的 Host 块生效</li>
+<li>若多个 Host 模式都匹配，先定义的优先</li>
+<li>使用 <code>Host *</code> 放在末尾可设置全局默认值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host server*      # 先检查这个</span><br><span class="line">    User admin</span><br><span class="line"></span><br><span class="line">Host *            # 后备默认值</span><br><span class="line">    User ubuntu</span><br><span class="line">    Port 22</span><br></pre></td></tr></table></figure>
+
+<p>当连接 <code>server01</code> 时，User 为 <code>admin</code>；连接其他主机时，User 为 <code>ubuntu</code>。</p>
+<h2 id="7-文件权限要求"><a href="#7-文件权限要求" class="headerlink" title="7. 文件权限要求"></a>7. 文件权限要求</h2><p>配置文件对权限敏感：</p>
+<ul>
+<li><code>~/.ssh/config</code> 权限应为 <strong>600</strong>（<code>chmod 600 ~/.ssh/config</code>）</li>
+<li>私钥文件权限应为 <strong>600</strong></li>
+</ul>
+<p>如需查看系统级默认配置，可查阅 <code>/etc/ssh/ssh_config</code>（语法相同）。</p>
+</article><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/head.jpg" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/04/01/finetune-groundingdino-on-libero/" title="基于LIBERO数据集微调GD"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">基于LIBERO数据集微调GD</div></div><div class="info-2"><div class="info-item-1">一些过程和经验，有些基础内容，思路可供参考</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Wamingmo</div><div class="author-info-description">碎碎念</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wamingmo"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">If you need to copy, please indicate the source. Thank you!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">1. 基本语法结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">2. 常用配置指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%80%9A%E9%85%8D%E7%AC%A6%E5%8C%B9%E9%85%8D"><span class="toc-number">3.</span> <span class="toc-text">3. 通配符匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.</span> <span class="toc-text">4. 完整示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%89%B9%E6%AE%8A%E5%8F%98%E9%87%8F"><span class="toc-number">5.</span> <span class="toc-text">5. 特殊变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%85%8D%E7%BD%AE%E7%BB%A7%E6%89%BF%E8%A7%84%E5%88%99"><span class="toc-number">6.</span> <span class="toc-text">6. 配置继承规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E8%A6%81%E6%B1%82"><span class="toc-number">7.</span> <span class="toc-text">7. 文件权限要求</span></a></li></ol></div></div></div></div></main></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"id":"location.pathname"}
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'Ov23liuq0QQhhUlLLV2T',
+      clientSecret: '72442c345b287ef76dad7d76af842044ee69bca0',
+      repo: 'gitalk-comments',
+      owner: 'wamingmo',
+      admin: ['wamingmo'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '7d8e0f46cb6dd36e613d17f43d32e943'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Gitalk' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Gitalk' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div></div></body></html>
