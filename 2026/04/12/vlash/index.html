@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>VLASH:Real-Time VLAs via Future-State-Aware Asynchronous Inference | My Love</title><meta name="author" content="Wamingmo"><meta name="copyright" content="Wamingmo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="VLASH 是一种通过“未来状态感知”的异步推理框架，在无需修改模型架构的前提下，显著降低延迟并提升 VLA 模型的运行速度，使其实现流畅的实时控制。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VLASH:Real-Time VLAs via Future-State-Aware Asynchronous Inference">
+<meta property="og:url" content="http://example.com/2026/04/12/vlash/index.html">
+<meta property="og:site_name" content="My Love">
+<meta property="og:description" content="VLASH 是一种通过“未来状态感知”的异步推理框架，在无需修改模型架构的前提下，显著降低延迟并提升 VLA 模型的运行速度，使其实现流畅的实时控制。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/head.jpg">
+<meta property="article:published_time" content="2026-04-12T11:39:32.407Z">
+<meta property="article:modified_time" content="2026-04-12T11:47:01.471Z">
+<meta property="article:author" content="Wamingmo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "VLASH:Real-Time VLAs via Future-State-Aware Asynchronous Inference",
+  "url": "http://example.com/2026/04/12/vlash/",
+  "image": "http://example.com/img/head.jpg",
+  "datePublished": "2026-04-12T11:39:32.407Z",
+  "dateModified": "2026-04-12T11:47:01.471Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Wamingmo",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2026/04/12/vlash/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'VLASH:Real-Time VLAs via Future-State-Aware Asynchronous Inference',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">My Love</span></a><a class="nav-page-title" href="/"><span class="site-name">VLASH:Real-Time VLAs via Future-State-Aware Asynchronous Inference</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">VLASH:Real-Time VLAs via Future-State-Aware Asynchronous Inference</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-04-12T11:39:32.407Z" title="Created 2026-04-12 19:39:32">2026-04-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-04-12T11:47:01.471Z" title="Updated 2026-04-12 19:47:01">2026-04-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Paper/">Paper</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>4mins</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="VLASH-Real-Time-VLAs-via-Future-State-Aware-Asynchronous-Inference"><a href="#VLASH-Real-Time-VLAs-via-Future-State-Aware-Asynchronous-Inference" class="headerlink" title="VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference"></a>VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2512.01031">paper</a></p>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><blockquote>
+<p>The future-state-awareness assumes that the VLA is able to leverage the rolled-forward robot state.</p>
+</blockquote>
+<p>前向推演：在训练的时候将提前录制好的视频数据作为一组时空数据（从头开始，就可以有现在和未来）输入。然后强迫模型学会使用当前图像和未来状态来预测未来动作。</p>
+<blockquote>
+<p>Offset state and action together.</p>
+<p>Fix the environment observation.</p>
+</blockquote>
+<p>使用随机偏移$\delta$,从同一轨迹上的未来状态$s_{t+\delta}$和未来动作块$a_{(t+δ):(t+δ+H−1)}$来构建训练目标。但是给定的图像是相同的，也就是说，相同的图像可以根据机器人的不同的偏移状态预测不同的真实动作。</p>
+<p>避免模型的死记硬背（从某一图像直接映射到某一动作，对视觉特征过拟合），如果说神经网络本质是概率预测，避免从某一特定输入到某一特定输出之间的映射概率太大。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Thinking...</span><br><span class="line">所以感觉还是要解决“学习”这个问题，为什么人能临时学过很多东西然后忘掉？或者可以从说明书学习东西的使用方法？人和机器人的根本区别是什么呢？</span><br><span class="line">之前感觉大模型回答问题的逻辑很有道理，就是从某一句话推测下一句，本质上就是计算概率分布。但是真的是所有行为都通用这个逻辑吗🤔？</span><br><span class="line">但是机器人所受的限制就是，本质是代码，本质是01串。但是只从语言生成来说，模型似乎已经可以算是具备基本的“说话”的功能了。</span><br><span class="line">再说情绪，我个人认为，现在之所以做出来的机器人不像人是因为，人们造它出来是用来干活的，而不是真的要造一个“人”。但是经常刷到的模仿一个人的说话语气做的聊天机器人是为什么呢？...</span><br><span class="line">多看多学吧。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在异步推理部署时，我们可以将向前推进的执行时刻状态与当前观察一起输入，微调后的VLA自然利用这个未来状态产生在执行区间上对齐且稳定的动作。</p>
+</blockquote>
+<p>怪不得vlash可以提升性能，之前的异步推理的问题是，在推理结束输出动作的时候，推理所用的图像是过去状态的图像，所以可能会导致输出动作的状态与观察图像的状态不符合。但是vlash直接反过来，直接使用图像和未来的状态进行训练和预测动作，正好是异步推理的模式：过去的图像+现在的状态&#x3D;现在的图像+未来的状态。</p>
+<blockquote>
+<p>Action Quantization</p>
+</blockquote>
+<p>将小动作量化成一个大动作（宏动作），可以减少执行的步数，加速机器人动作的执行。</p>
+<h3 id="meth"><a href="#meth" class="headerlink" title="meth"></a>meth</h3><blockquote>
+<p>$$[o_t , (s_t , A_t ), (s_{t+1}, A_{t+1}), . . . , (s_{t+Δmax} , A_{t+Δmax} )]$$</p>
+</blockquote>
+<p>将一个观察和多个偏移分支打包到一个序列中,其中每个$$(s_{t+δ}, A_{t+δ})$$对应一个时序偏移</p>
+<blockquote>
+<p>We then apply a block-sparse self-attention mask with the following structure: </p>
+<p>• All observation tokens (e.g., image tokens from two views and language prompt, about ∼700 tokens for π0.5) can attend to each other, as in standard VLA fine-tuning. </p>
+<p>• For each offset branch, the state-action tokens (st+δ, At+δ) can attend to all observation tokens and to tokens within the same offset, but cannot attend to tokens from other offsets.</p>
+</blockquote>
+<p>然后我们应用具有以下结构的块稀疏自注意力掩码：</p>
+<p><strong>• 所有观察标记（例如来自两个视角的图像标记和语言提示，对于π0.5约700个标记）可以相互关注，如同标准VLA微调中一样。</strong></p>
+<p><strong>• 对于每个偏移分支，状态-动作标记(st+δ, At+δ)可以关注所有观察标记和同一偏移内的标记，但不能关注来自其他偏移的标记。</strong></p>
+<blockquote>
+<img src="img/1775120015954.png" width="50%"></blockquote>
+<p>图所示的这种注意力图使不同偏移基于共享观察进行条件化，同时保持相互独立。</p>
+<ul>
+<li><strong>防止误差累积</strong>：<br>如果允许 t+2依赖 t+1的预测结果，那么一旦模型在 t+1 时刻预测错了（比如预测手会向左，实际向右），这个错误会像滚雪球一样传给 t+2 ，导致后面的预测全崩。让它们相互独立，意味着每个时间点的预测都是<strong>直接基于当前图像</strong>算出来的，互不干扰。</li>
+<li><strong>支持“异步推理”和“跳步”</strong>：<br>这是最关键的一点。在部署时，由于计算延迟，我们可能只需要预测 t+3 时刻的动作，而不需要 t+1或 t+2的。<ul>
+<li>如果它们互相关联，你必须先算出 t+1才能算 t+3串行计算，很慢）。</li>
+<li>因为它们是<strong>相互独立</strong>的（都只看图），你可以直接跳过中间步骤，瞬间算出 t+3的动作。这大大加快了机器人的反应速度。</li>
+</ul>
+</li>
+</ul>
+</article><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/head.jpg" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/04/12/ssh/" title="SSH简介"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">SSH简介</div></div><div class="info-2"><div class="info-item-1">SSH（Secure Shell）是一种加密网络协议，用于在不安全的网络中安全地进行远程登录和命令执行，替代了早期的明文传输协议 Telnet。</div></div></div></a><a class="pagination-related" href="/2026/04/12/faster/" title="FASTER:Rethinking Real-Time Flow VLAs"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">FASTER:Rethinking Real-Time Flow VLAs</div></div><div class="info-2"><div class="info-item-1">基于流匹配模型，采取根据时间距离分配不同时间步调度的方法，从而加速了早期动作的生成速度，提高反应能力，并做一些适配（比如使用混合调度的微调方式，与动作条件协同）。</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Wamingmo</div><div class="author-info-description">碎碎念</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wamingmo"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">If you need to copy, please indicate the source. Thank you!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VLASH-Real-Time-VLAs-via-Future-State-Aware-Asynchronous-Inference"><span class="toc-number">1.</span> <span class="toc-text">VLASH: Real-Time VLAs via Future-State-Aware Asynchronous Inference</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Note"><span class="toc-number">1.1.</span> <span class="toc-text">Note</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#meth"><span class="toc-number">1.2.</span> <span class="toc-text">meth</span></a></li></ol></li></ol></div></div></div></div></main></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"id":"location.pathname"}
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'Ov23liuq0QQhhUlLLV2T',
+      clientSecret: '72442c345b287ef76dad7d76af842044ee69bca0',
+      repo: 'gitalk-comments',
+      owner: 'wamingmo',
+      admin: ['wamingmo'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || 'b11ac90b8ddeb5ac6969cb43397b03af'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Gitalk' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Gitalk' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div></div></body></html>
