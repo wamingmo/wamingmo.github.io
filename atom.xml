@@ -4,9 +4,9 @@
     <name>Wamingmo</name>
   </author>
   <generator uri="https://hexo.io/">Hexo</generator>
-  <id>http://example.com/</id>
-  <link href="http://example.com/" rel="alternate"/>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <id>https://wamingmo.github.io/</id>
+  <link href="https://wamingmo.github.io/" rel="alternate"/>
+  <link href="https://wamingmo.github.io/atom.xml" rel="self"/>
   <rights>All rights reserved 2026, Wamingmo</rights>
   <subtitle>让雨亭</subtitle>
   <title>My Love</title>
@@ -15,10 +15,10 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="Paper" scheme="http://example.com/categories/Paper/"/>
-    <category term="VLA" scheme="http://example.com/tags/VLA/"/>
-    <id>http://example.com/2026/04/12/faster/</id>
-    <link href="http://example.com/2026/04/12/faster/"/>
+    <category term="Paper" scheme="https://wamingmo.github.io/categories/Paper/"/>
+    <category term="VLA" scheme="https://wamingmo.github.io/tags/VLA/"/>
+    <id>https://wamingmo.github.io/2026/04/12/faster/</id>
+    <link href="https://wamingmo.github.io/2026/04/12/faster/"/>
     <published>2026-04-12T11:41:42.092Z</published>
     <summary>基于流匹配模型，采取根据时间距离分配不同时间步调度的方法，从而加速了早期动作的生成速度，提高反应能力，并做一些适配（比如使用混合调度的微调方式，与动作条件协同）。</summary>
     <title>FASTER:Rethinking Real-Time Flow VLAs</title>
@@ -28,10 +28,10 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="Paper" scheme="http://example.com/categories/Paper/"/>
-    <category term="VLA" scheme="http://example.com/tags/VLA/"/>
-    <id>http://example.com/2026/04/12/vlash/</id>
-    <link href="http://example.com/2026/04/12/vlash/"/>
+    <category term="Paper" scheme="https://wamingmo.github.io/categories/Paper/"/>
+    <category term="VLA" scheme="https://wamingmo.github.io/tags/VLA/"/>
+    <id>https://wamingmo.github.io/2026/04/12/vlash/</id>
+    <link href="https://wamingmo.github.io/2026/04/12/vlash/"/>
     <published>2026-04-12T11:39:32.407Z</published>
     <summary>VLASH 是一种通过“未来状态感知”的异步推理框架，在无需修改模型架构的前提下，显著降低延迟并提升 VLA 模型的运行速度，使其实现流畅的实时控制。</summary>
     <title>VLASH:Real-Time VLAs via Future-State-Aware Asynchronous Inference</title>
@@ -41,9 +41,9 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="Study" scheme="http://example.com/categories/Study/"/>
-    <id>http://example.com/2026/04/12/ssh/</id>
-    <link href="http://example.com/2026/04/12/ssh/"/>
+    <category term="Study" scheme="https://wamingmo.github.io/categories/Study/"/>
+    <id>https://wamingmo.github.io/2026/04/12/ssh/</id>
+    <link href="https://wamingmo.github.io/2026/04/12/ssh/"/>
     <published>2026-04-12T02:37:08.414Z</published>
     <summary>SSH（Secure Shell）是一种加密网络协议，用于在不安全的网络中安全地进行远程登录和命令执行，替代了早期的明文传输协议 Telnet。</summary>
     <title>SSH简介</title>
@@ -53,10 +53,10 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="Study" scheme="http://example.com/categories/Study/"/>
-    <category term="internship" scheme="http://example.com/tags/internship/"/>
-    <id>http://example.com/2026/04/01/finetune-groundingdino-on-libero/</id>
-    <link href="http://example.com/2026/04/01/finetune-groundingdino-on-libero/"/>
+    <category term="Study" scheme="https://wamingmo.github.io/categories/Study/"/>
+    <category term="internship" scheme="https://wamingmo.github.io/tags/internship/"/>
+    <id>https://wamingmo.github.io/2026/04/01/finetune-groundingdino-on-libero/</id>
+    <link href="https://wamingmo.github.io/2026/04/01/finetune-groundingdino-on-libero/"/>
     <published>2026-04-01T08:09:42.266Z</published>
     <summary>一些过程和经验，有些基础内容，思路可供参考</summary>
     <title>基于LIBERO数据集微调GD</title>
@@ -66,10 +66,10 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="Paper" scheme="http://example.com/categories/Paper/"/>
-    <category term="VLA" scheme="http://example.com/tags/VLA/"/>
-    <id>http://example.com/2026/02/15/pi-0.5/</id>
-    <link href="http://example.com/2026/02/15/pi-0.5/"/>
+    <category term="Paper" scheme="https://wamingmo.github.io/categories/Paper/"/>
+    <category term="VLA" scheme="https://wamingmo.github.io/tags/VLA/"/>
+    <id>https://wamingmo.github.io/2026/02/15/pi-0.5/</id>
+    <link href="https://wamingmo.github.io/2026/02/15/pi-0.5/"/>
     <published>2026-02-15T10:52:37.483Z</published>
     <summary>一个基于视觉-语言-动作模型的开放世界泛化模型</summary>
     <title>π0.5:a Vision-Language-Action Model with Open-World Generalization</title>
@@ -79,9 +79,9 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="Study" scheme="http://example.com/categories/Study/"/>
-    <id>http://example.com/2026/01/26/cmake/</id>
-    <link href="http://example.com/2026/01/26/cmake/"/>
+    <category term="Study" scheme="https://wamingmo.github.io/categories/Study/"/>
+    <id>https://wamingmo.github.io/2026/01/26/cmake/</id>
+    <link href="https://wamingmo.github.io/2026/01/26/cmake/"/>
     <published>2026-01-26T14:08:22.185Z</published>
     <summary>偶然了解到一个用cmake构建的mlsys工程，于是简单了解了一下cmake的语法</summary>
     <title>CMake语法简介</title>
@@ -91,9 +91,9 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="Study" scheme="http://example.com/categories/Study/"/>
-    <id>http://example.com/2026/01/22/makefile/</id>
-    <link href="http://example.com/2026/01/22/makefile/"/>
+    <category term="Study" scheme="https://wamingmo.github.io/categories/Study/"/>
+    <id>https://wamingmo.github.io/2026/01/22/makefile/</id>
+    <link href="https://wamingmo.github.io/2026/01/22/makefile/"/>
     <published>2026-01-22T03:53:16.437Z</published>
     <summary>Makefile 是一个用于自动化构建的工具，它通过定义规则来描述如何从源文件生成目标文件。</summary>
     <title>Makefile简介</title>
@@ -103,10 +103,10 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="OS" scheme="http://example.com/categories/OS/"/>
-    <category term="os" scheme="http://example.com/tags/os/"/>
-    <id>http://example.com/2025/09/21/os/</id>
-    <link href="http://example.com/2025/09/21/os/"/>
+    <category term="OS" scheme="https://wamingmo.github.io/categories/OS/"/>
+    <category term="os" scheme="https://wamingmo.github.io/tags/os/"/>
+    <id>https://wamingmo.github.io/2025/09/21/os/</id>
+    <link href="https://wamingmo.github.io/2025/09/21/os/"/>
     <published>2025-09-21T14:47:23.904Z</published>
     <summary>关于参加系统能力大赛这件事的一点体会</summary>
     <title>系统能力大赛-os内核实现赛道</title>
@@ -116,11 +116,11 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="OS" scheme="http://example.com/categories/OS/"/>
-    <category term="shell" scheme="http://example.com/tags/shell/"/>
-    <category term="linux" scheme="http://example.com/tags/linux/"/>
-    <id>http://example.com/2025/06/11/sh/</id>
-    <link href="http://example.com/2025/06/11/sh/"/>
+    <category term="OS" scheme="https://wamingmo.github.io/categories/OS/"/>
+    <category term="shell" scheme="https://wamingmo.github.io/tags/shell/"/>
+    <category term="linux" scheme="https://wamingmo.github.io/tags/linux/"/>
+    <id>https://wamingmo.github.io/2025/06/11/sh/</id>
+    <link href="https://wamingmo.github.io/2025/06/11/sh/"/>
     <published>2025-06-11T13:17:37.000Z</published>
     <summary>今年的系统能力大赛的评测方式发生改变，需要在启动自己的操作系统之后，自动的扫描磁盘，运行`XXXX-testcode.sh`，为了做shell的支持，去简单了解了一下shell的原理。</summary>
     <title>OS视角下对Shell的简单理解</title>
@@ -130,10 +130,10 @@
     <author>
       <name>Wamingmo</name>
     </author>
-    <category term="Study" scheme="http://example.com/categories/Study/"/>
-    <category term="blog" scheme="http://example.com/tags/blog/"/>
-    <id>http://example.com/2025/06/04/butterfly-theme-blog/</id>
-    <link href="http://example.com/2025/06/04/butterfly-theme-blog/"/>
+    <category term="Study" scheme="https://wamingmo.github.io/categories/Study/"/>
+    <category term="blog" scheme="https://wamingmo.github.io/tags/blog/"/>
+    <id>https://wamingmo.github.io/2025/06/04/butterfly-theme-blog/</id>
+    <link href="https://wamingmo.github.io/2025/06/04/butterfly-theme-blog/"/>
     <published>2025-06-03T16:00:00.000Z</published>
     <summary>关于butterfly主题的博客的一些配置简介</summary>
     <title>Study Butterfly Theme Blog2</title>
