@@ -10,7 +10,20 @@
   <rights>All rights reserved 2026, Wamingmo</rights>
   <subtitle>让雨亭</subtitle>
   <title>My Love</title>
-  <updated>2026-04-12T11:52:36.028Z</updated>
+  <updated>2026-06-28T01:39:39.551Z</updated>
+  <entry>
+    <author>
+      <name>Wamingmo</name>
+    </author>
+    <category term="Paper" scheme="https://wamingmo.github.io/categories/Paper/"/>
+    <category term="read paper" scheme="https://wamingmo.github.io/tags/read-paper/"/>
+    <id>https://wamingmo.github.io/2026/06/28/how-to-read-paper-with-ai/</id>
+    <link href="https://wamingmo.github.io/2026/06/28/how-to-read-paper-with-ai/"/>
+    <published>2026-06-28T01:37:11.400Z</published>
+    <summary>用 AI 读论文，最忌讳的提示词是：&quot;帮我总结一下这篇文章。&quot;</summary>
+    <title>当我用AI生成告诉我如何用AI读论文</title>
+    <updated>2026-06-28T01:39:39.551Z</updated>
+  </entry>
   <entry>
     <author>
       <name>Wamingmo</name>
