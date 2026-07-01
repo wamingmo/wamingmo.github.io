@@ -10,7 +10,20 @@
   <rights>All rights reserved 2026, Wamingmo</rights>
   <subtitle>让雨亭</subtitle>
   <title>My Love</title>
-  <updated>2026-06-28T01:39:39.551Z</updated>
+  <updated>2026-07-01T07:20:42.109Z</updated>
+  <entry>
+    <author>
+      <name>Wamingmo</name>
+    </author>
+    <category term="chore" scheme="https://wamingmo.github.io/categories/chore/"/>
+    <category term="disk" scheme="https://wamingmo.github.io/tags/disk/"/>
+    <id>https://wamingmo.github.io/2026/07/01/cclean/</id>
+    <link href="https://wamingmo.github.io/2026/07/01/cclean/"/>
+    <published>2026-07-01T07:00:35.134Z</published>
+    <summary>如何清理你爆满的C盘和D盘</summary>
+    <title>我与存储空间的相爱相杀</title>
+    <updated>2026-07-01T07:20:42.109Z</updated>
+  </entry>
   <entry>
     <author>
       <name>Wamingmo</name>
@@ -123,7 +136,7 @@
     <published>2025-09-21T14:47:23.904Z</published>
     <summary>关于参加系统能力大赛这件事的一点体会</summary>
     <title>系统能力大赛-os内核实现赛道</title>
-    <updated>2026-03-01T16:10:59.112Z</updated>
+    <updated>2026-07-01T07:19:14.676Z</updated>
   </entry>
   <entry>
     <author>
