@@ -10,7 +10,19 @@
   <rights>All rights reserved 2026, Wamingmo</rights>
   <subtitle>让雨亭</subtitle>
   <title>My Love</title>
-  <updated>2026-07-01T07:20:42.109Z</updated>
+  <updated>2026-09-13T10:13:27.532Z</updated>
+  <entry>
+    <author>
+      <name>Wamingmo</name>
+    </author>
+    <category term="Asterinas" scheme="https://wamingmo.github.io/categories/Asterinas/"/>
+    <id>https://wamingmo.github.io/2026/09/13/open-source-getting-start--asterinas/</id>
+    <link href="https://wamingmo.github.io/2026/09/13/open-source-getting-start--asterinas/"/>
+    <published>2026-09-13T10:10:50.222Z</published>
+    <summary>尝试贡献 Asterinas 项目，记录开发环境搭建和代码贡献流程（未coding）。</summary>
+    <title>Asterinas 开源贡献实战尝试</title>
+    <updated>2026-09-13T10:13:27.532Z</updated>
+  </entry>
   <entry>
     <author>
       <name>Wamingmo</name>

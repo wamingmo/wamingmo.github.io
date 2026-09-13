@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Asterinas 开源贡献实战尝试 | My Love</title><meta name="author" content="Wamingmo"><meta name="copyright" content="Wamingmo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="尝试贡献 Asterinas 项目，记录开发环境搭建和代码贡献流程（未coding）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Asterinas 开源贡献实战尝试">
+<meta property="og:url" content="https://wamingmo.github.io/2026/09/13/open-source-getting-start--asterinas/index.html">
+<meta property="og:site_name" content="My Love">
+<meta property="og:description" content="尝试贡献 Asterinas 项目，记录开发环境搭建和代码贡献流程（未coding）。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wamingmo.github.io/img/head.jpg">
+<meta property="article:published_time" content="2026-09-13T10:10:50.222Z">
+<meta property="article:modified_time" content="2026-09-13T10:13:27.532Z">
+<meta property="article:author" content="Wamingmo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wamingmo.github.io/img/head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Asterinas 开源贡献实战尝试",
+  "url": "https://wamingmo.github.io/2026/09/13/open-source-getting-start--asterinas/",
+  "image": "https://wamingmo.github.io/img/head.jpg",
+  "datePublished": "2026-09-13T10:10:50.222Z",
+  "dateModified": "2026-09-13T10:13:27.532Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Wamingmo",
+      "url": "https://wamingmo.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://wamingmo.github.io/2026/09/13/open-source-getting-start--asterinas/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Asterinas 开源贡献实战尝试',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="My Love" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/atom.xml"><i class="fa-fw fas fa-rss"></i><span> RSS</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">My Love</span></a><a class="nav-page-title" href="/"><span class="site-name">Asterinas 开源贡献实战尝试</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/atom.xml"><i class="fa-fw fas fa-rss"></i><span> RSS</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Asterinas 开源贡献实战尝试</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-09-13T10:10:50.222Z" title="Created 2026-09-13 18:10:50">2026-09-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-09-13T10:13:27.532Z" title="Updated 2026-09-13 18:13:27">2026-09-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Asterinas/">Asterinas</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>4mins</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="一、-开发环境搭建（Windows-WSL2-Docker）"><a href="#一、-开发环境搭建（Windows-WSL2-Docker）" class="headerlink" title="一、 开发环境搭建（Windows&#x2F;WSL2&#x2F;Docker）"></a>一、 开发环境搭建（Windows&#x2F;WSL2&#x2F;Docker）</h2><h3 id="1-1-基础环境"><a href="#1-1-基础环境" class="headerlink" title="1.1 基础环境"></a>1.1 基础环境</h3><ul>
+<li><strong>宿主机</strong>：Windows 11（建议内存 16GB 以上）。</li>
+<li><strong>WSL2</strong>：安装 Ubuntu 发行版（如 <code>Ubuntu-D</code>），<strong>代码一定要放在 WSL 文件系统内</strong>（如 <code>/home/user/asterinas</code>），不要放在 <code>C:\</code> 盘，否则性能极差。</li>
+<li><strong>Docker Desktop</strong>：安装并启用 WSL2 集成。在 <code>Settings -&gt; Resources -&gt; WSL Integration</code> 中，务必打开你使用的发行版（如 <code>Ubuntu-D</code>）的开关。</li>
+<li><strong>网络配置</strong>：在 Windows 用户目录创建 <code>.wslconfig</code>，配置 <code>networkingMode=mirrored</code> 和 <code>autoProxy=true</code>，解决 NAT 模式下代理不通的问题。代理软件需开启“允许局域网连接”。</li>
+</ul>
+<h3 id="1-2-启动-Dev-Container"><a href="#1-2-启动-Dev-Container" class="headerlink" title="1.2 启动 Dev Container"></a>1.2 启动 Dev Container</h3><ul>
+<li>在 WSL 终端克隆代码：<code>git clone https://github.com/asterinas/asterinas</code></li>
+<li>使用 VS Code 打开该文件夹，按 <code>F1</code> 选择 <code>Dev Containers: Reopen in Container</code>。</li>
+<li>首次启动会自动拉取 <code>asterinas/dev</code> 镜像并安装 VS Code Server。若卡在下载，请确保容器网络畅通。</li>
+<li><strong>持久化配置</strong>：建议在 <code>.devcontainer/devcontainer.json</code> 的 <code>mounts</code> 中挂载 <code>~/.vscode-server</code> 目录，避免每次重建容器重复下载。</li>
+<li><strong>插件安装</strong>：在 <code>customizations.vscode.extensions</code> 中添加你需要的插件（如 <code>rust-lang.rust-analyzer</code>, <code>vadimcn.vscode-lldb</code>, <code>eamodio.gitlens</code>），重建容器后会自动安装。</li>
+</ul>
+<h3 id="1-3-AI-辅助工具（超级外挂）"><a href="#1-3-AI-辅助工具（超级外挂）" class="headerlink" title="1.3 AI 辅助工具（超级外挂）"></a>1.3 AI 辅助工具（超级外挂）</h3><p>Dev Container 已预装 <code>claude</code> 和 <code>codex</code> CLI。</p>
+<ul>
+<li><strong>Claude Code &#x2F; Codex CLI</strong>：在项目根目录运行，会自动读取 <code>AGENTS.md</code> 和 <code>CLAUDE.md</code>，理解 Asterinas 的编译规范和代码风格。</li>
+<li><strong>账号订阅建议</strong>：推荐购买 <strong>ChatGPT Plus</strong>（含 Codex 额度），或使用 <strong>API Key</strong> 按量付费。不要买共享号，容易封号。</li>
+</ul>
+<hr>
+<h2 id="二、-编译、运行与调试"><a href="#二、-编译、运行与调试" class="headerlink" title="二、 编译、运行与调试"></a>二、 编译、运行与调试</h2><h3 id="2-1-核心-Makefile-命令"><a href="#2-1-核心-Makefile-命令" class="headerlink" title="2.1 核心 Makefile 命令"></a>2.1 核心 Makefile 命令</h3><p>Asterinas 的构建、运行、测试全部通过根目录的 <code>Makefile</code> 管理。</p>
+<ul>
+<li><strong><code>make kernel</code></strong>：编译内核，并生成 <code>initramfs</code>（初始内存文件系统，包含基础用户态程序）。</li>
+<li><strong><code>make run_kernel</code></strong>：编译并在 QEMU 中启动内核。成功后会进入 Asterinas 内部的 <code>~ #</code> 终端。</li>
+<li><strong><code>make run_kernel LOG_LEVEL=debug</code></strong>：打开详细日志运行，便于排查问题。</li>
+</ul>
+<h3 id="2-2-验证流程（极其重要）"><a href="#2-2-验证流程（极其重要）" class="headerlink" title="2.2 验证流程（极其重要）"></a>2.2 验证流程（极其重要）</h3><p>修改代码后，必须按以下顺序验证：</p>
+<ol>
+<li><strong>格式与静态检查</strong>：<code>make check</code>（检查空格、rustfmt、clippy、拼写等）。报错就运行 <code>make format</code> 自动修复。</li>
+<li><strong>单元测试</strong>：<code>make test</code>（用户态）、<code>make ktest</code>（内核态）。</li>
+<li><strong>回归测试</strong>：<code>make run_kernel AUTO_TEST=regression</code>。如果末尾输出 <code>All regression tests passed.</code>，说明没有破坏现有功能。</li>
+<li><strong>手动验证</strong>：进入 Asterinas 终端，手动运行相关命令验证修改是否生效。</li>
+</ol>
+<hr>
+<h2 id="三、-开源贡献标准流程（SOP）"><a href="#三、-开源贡献标准流程（SOP）" class="headerlink" title="三、 开源贡献标准流程（SOP）"></a>三、 开源贡献标准流程（SOP）</h2><h3 id="3-1-寻找任务"><a href="#3-1-寻找任务" class="headerlink" title="3.1 寻找任务"></a>3.1 寻找任务</h3><ul>
+<li><strong>筛选标签</strong>：在 GitHub Issues 页面筛选 <code>C-good-first-issue</code>（新手任务）、<code>help wanted</code>（急需帮助）、<code>C-bug</code>（修复 Bug）、<code>C-documentation</code>（文档）、<code>C-test</code>（测试）。</li>
+<li><strong>避坑指南</strong>：不要碰 <code>C-feature</code>（新功能）、<code>C-architecture</code>（架构重构）以及带有 <code>RFC</code> 或 <code>discussion</code> 标签的哲学辩论帖。</li>
+</ul>
+<h3 id="3-2-认领任务（防撞车）"><a href="#3-2-认领任务（防撞车）" class="headerlink" title="3.2 认领任务（防撞车）"></a>3.2 认领任务（防撞车）</h3><ul>
+<li><strong>必须认领</strong>：在 Issue 下方评论 <code>@boterinas claim</code>，机器人会自动把你设为 Assignee。</li>
+<li><strong>有人讨论但无人认领</strong>：先礼貌留言询问是否有人正在做，等待 24-48 小时无人反对后，再 <code>claim</code>。</li>
+<li><strong>绝对不要抢</strong>：如果有人已经留言“我正在做”或已发起 PR，不要抢别人的任务。</li>
+</ul>
+<h3 id="3-3-开发与提交"><a href="#3-3-开发与提交" class="headerlink" title="3.3 开发与提交"></a>3.3 开发与提交</h3><ul>
+<li><strong>建立分支</strong>：<code>git checkout -b fix-issue-xxxx</code>。</li>
+<li><strong>原子提交</strong>：一个提交只做一件事，提交信息使用祈使语气（如 <code>Fix u32 underflow in ...</code>），首行不超过 72 字符。</li>
+<li><strong>同步主分支</strong>：使用 <code>git rebase origin/main</code> 把你的提交“搬”到最新代码上，保持历史线性。</li>
+<li><strong>整理提交</strong>：使用 <code>git rebase -i HEAD~N</code> 合并多余的 fix 提交。修改后需 <code>git push -f</code> 强制推送。</li>
+<li><strong>发起 PR</strong>：在 PR 描述中用 <code>Fixes #Issue编号</code> 关联任务。若涉及用户可见 API，必须同步更新 Linux Compatibility 文档。</li>
+</ul>
+<h3 id="3-4-遇到困难与放弃（非常重要）"><a href="#3-4-遇到困难与放弃（非常重要）" class="headerlink" title="3.4 遇到困难与放弃（非常重要）"></a>3.4 遇到困难与放弃（非常重要）</h3><ul>
+<li><strong>求助</strong>：在 Issue 中描述你卡住的具体技术点和已尝试的方案，维护者通常会指引方向。</li>
+<li><strong>体面放弃</strong>：如果确实做不出来，不要“占坑不干活”。在 Issue 中诚恳说明情况，分享你的排查记录，然后评论 <code>@boterinas unclaim</code> 释放任务。维护者会认为你非常专业。</li>
+</ul>
+<hr>
+<h2 id="四、-附录（杂项与冷知识）"><a href="#四、-附录（杂项与冷知识）" class="headerlink" title="四、 附录（杂项与冷知识）"></a>四、 附录（杂项与冷知识）</h2><ul>
+<li><strong><code>C-</code> 前缀的含义</strong>：<code>C</code> 代表 Category（分类）或 Component（组件），与 C 语言<strong>毫无关系</strong>。例如 <code>C-bug</code>、<code>C-documentation</code>。</li>
+<li><strong><code>C-documentation</code> 改什么</strong>：修补代码注释（Rust <code>///</code>）、更新官方书籍（<code>book/</code>）、修正拼写与死链、更新 Linux 兼容性表格。</li>
+<li><strong><code>C-test</code> 改什么</strong>：补充边界单元测试、添加回归测试脚本（<code>test/initramfs/src/regression/</code>）、解除被屏蔽的测试用例。</li>
+<li><strong><code>initramfs</code> 是什么</strong>：全称 initial RAM filesystem，是内核启动早期加载到内存中的临时根文件系统（cpio 归档）。Asterinas 用它作为最小用户环境来运行测试。</li>
+<li><strong>Docker 镜像与容器</strong>：镜像是只读模板（大），容器是可写实例（小）。删除容器不会删除镜像，重建容器会丢失容器内临时安装的软件，但挂载的代码和配置不会丢。</li>
+<li><strong>Docker 磁盘空间回收</strong>：删除镜像后，Windows 磁盘空间不会立刻变小。需用 <code>diskpart</code> 或 <code>Optimize-VHD</code> 压缩 <code>ext4.vhdx</code> 虚拟硬盘。</li>
+<li><strong><code>git rebase</code> vs <code>git merge</code></strong>：大项目偏爱 <code>rebase</code>，是为了保持线性历史，方便 <code>git bisect</code> 二分查找排错，并避免无意义的合并提交污染主分支历史。</li>
+<li><strong>VS Code 插件持久化</strong>：手动在容器内安装的插件，重建容器后会丢失；写进 <code>devcontainer.json</code> 的 <code>extensions</code> 数组中才会自动重装。</li>
+</ul>
+</article><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/head.jpg" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/07/01/cclean/" title="我与存储空间的相爱相杀"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">我与存储空间的相爱相杀</div></div><div class="info-2"><div class="info-item-1">如何清理你爆满的C盘和D盘</div></div></div></a></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Wamingmo</div><div class="author-info-description">碎碎念</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wamingmo"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">If you need to copy, please indicate the source. Thank you!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%88Windows-WSL2-Docker%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">一、 开发环境搭建（Windows&#x2F;WSL2&#x2F;Docker）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 基础环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%90%AF%E5%8A%A8-Dev-Container"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 启动 Dev Container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-AI-%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7%EF%BC%88%E8%B6%85%E7%BA%A7%E5%A4%96%E6%8C%82%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 AI 辅助工具（超级外挂）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E7%BC%96%E8%AF%91%E3%80%81%E8%BF%90%E8%A1%8C%E4%B8%8E%E8%B0%83%E8%AF%95"><span class="toc-number">2.</span> <span class="toc-text">二、 编译、运行与调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%A0%B8%E5%BF%83-Makefile-%E5%91%BD%E4%BB%A4"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 核心 Makefile 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%AA%8C%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%9E%81%E5%85%B6%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 验证流程（极其重要）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E5%BC%80%E6%BA%90%E8%B4%A1%E7%8C%AE%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B%EF%BC%88SOP%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">三、 开源贡献标准流程（SOP）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AF%BB%E6%89%BE%E4%BB%BB%E5%8A%A1"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 寻找任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%AE%A4%E9%A2%86%E4%BB%BB%E5%8A%A1%EF%BC%88%E9%98%B2%E6%92%9E%E8%BD%A6%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 认领任务（防撞车）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%BC%80%E5%8F%91%E4%B8%8E%E6%8F%90%E4%BA%A4"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 开发与提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E9%81%87%E5%88%B0%E5%9B%B0%E9%9A%BE%E4%B8%8E%E6%94%BE%E5%BC%83%EF%BC%88%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 遇到困难与放弃（非常重要）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E9%99%84%E5%BD%95%EF%BC%88%E6%9D%82%E9%A1%B9%E4%B8%8E%E5%86%B7%E7%9F%A5%E8%AF%86%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">四、 附录（杂项与冷知识）</span></a></li></ol></div></div></div></div></main></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"id":"location.pathname"}
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'Ov23liuq0QQhhUlLLV2T',
+      clientSecret: '72442c345b287ef76dad7d76af842044ee69bca0',
+      repo: 'gitalk-comments',
+      owner: 'wamingmo',
+      admin: ['wamingmo'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || '304f591dc9913ca32b8cd8be3b258841'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Gitalk' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Gitalk' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div></div></body></html>
