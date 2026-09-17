@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Wamingmo</rights>
   <subtitle>让雨亭</subtitle>
   <title>My Love</title>
-  <updated>2026-09-17T03:41:40.799Z</updated>
+  <updated>2026-09-17T03:43:27.425Z</updated>
   <entry>
     <author>
       <name>Wamingmo</name>
@@ -21,8 +21,8 @@
     <link href="https://wamingmo.github.io/2026/09/17/first-try-fix-issue-and-pr/"/>
     <published>2026-09-17T03:38:05.749Z</published>
     <summary>尝试贡献 Asterinas 项目但是遭遇了重构，pr没有被merge，部分经验。(already coding，though only one line modified)</summary>
-    <title>Asterinas OverlayFS `rmdir` Panic 修复经验总结</title>
-    <updated>2026-09-17T03:41:40.799Z</updated>
+    <title>Asterinas OverlayFS rmdir Panic 修复经验总结</title>
+    <updated>2026-09-17T03:43:27.425Z</updated>
   </entry>
   <entry>
     <author>
